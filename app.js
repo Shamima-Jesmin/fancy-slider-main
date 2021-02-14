@@ -83,19 +83,27 @@ const createSlider = () => {
   
    const duration = document.getElementById('duration').value ||10000 ;
    imagesArea.style.display = 'none';
-   sliders.forEach(slide => {
-  let item = document.createElement('div')
-    item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
-    src="${slide}"
-    alt="">`;
-    sliderContainer.appendChild(item)
-  });
-  changeSlide(0)
-  timer = setInterval(function () {
-    slideIndex++;
-    changeSlide(slideIndex);
-  }, duration);
+   if(duration>0){
+    sliders.forEach(slide => {
+      let item = document.createElement('div')
+        item.className = "slider-item";
+        item.innerHTML = `<img class="w-100"
+        src="${slide}"
+        alt="">`;
+        sliderContainer.appendChild(item)
+      });
+      changeSlide(0)
+      timer = setInterval(function () {
+        slideIndex++;
+        changeSlide(slideIndex);
+      }, duration);
+   }
+   else{
+     alert("Time can't be negative.");
+     document.getElementById('duration').value = '';
+     document.querySelector('.main').style.display = 'none';
+     imagesArea.style.display = 'block';
+   }
 }
 
 
